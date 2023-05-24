@@ -18,7 +18,8 @@
     "core-js": "^3.21.1",
     "url-loader": "^4.1.1",
     "webpack": "^5.72.0",
-    "webpack-cli": "^4.9.2"
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.15.0"
   },
   "dependencies": {
     "vatom-spaces-plugins": "^1.1.2"
