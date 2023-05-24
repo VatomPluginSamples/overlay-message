@@ -1,0 +1,15 @@
+{
+  "id": "hud-message-simple-overlay",
+  "name": "vsp-hud-message",
+  "version": "0.0.2",
+  "beta": true,
+  "personalPlugin": false,
+  "description": "desc-short",
+  "longDescription": "desc-long",
+  "configuration": "desc-config-instructions",
+  "category": "Communication",
+  "businessId": "Id6dHeoyGS",
+  "price": 0,
+  "releaseNotes": "first draft",
+  "entrypoint": "https://plugins.vatom.com/Id6dHeoyGS/7057d61438dd7f2e97a05d62f3e4f5dc/plugin.js"
+}
