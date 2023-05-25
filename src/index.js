@@ -1,7 +1,7 @@
 import { BasePlugin, BaseComponent } from 'vatom-spaces-plugins'
 
 /**
- * This is the main entry point for your plugin.
+ * Overlay Message plugin.
  *
  * All information regarding plugin development can be found at
  * https://developer.vatom.com/plugins/plugins/
@@ -9,30 +9,78 @@ import { BasePlugin, BaseComponent } from 'vatom-spaces-plugins'
  * @license MIT
  * @author Vatom Inc.
  */
-export default class MyPlugin extends BasePlugin {
 
-    /** Plugin info */
-    static id = "vatom-template-plugin"
-    static name = "Vatom Template Plugin"
 
-    /** Called on load */
-    onLoad() {
+// NOTE:
+// For manual upload of plugin use the following instead of
+// 'import  and 'export default' statements.
+// module.exports = class ...
 
-        // Create a button in the toolbar
-        this.menus.register({
-            icon: this.paths.absolute('button-icon.png'),
-            text: 'Plugin',
-            action: () => this.onButtonPress()
-        })
 
+export default class OverlayMessagePlugin extends BasePlugin {
+  //================ properties of class OverlayMessagePlugin
+
+  // Plugin ID
+  static get id()             { return 'toast-notice' }
+  static get name()           { return 'Toast Notice' } 
+  //
+  // Client instance properties
+  //myHudState        = null;   // What is currently showing on the hud?
+  mySplashIsVisible = false;
+
+
+  //================ methods for class OverlayMessagePlugin
+
+  onLoad() {
+
+    // Prepare a HUD display.
+    this.menus.register({
+      id:       'hud',
+      title:    'hudmenu-label',
+      text:     'hudmenu-text',
+      section:  'overlay-top',
+      panel: {
+          iframeURL: this.paths.absolute('hud.html'),
+          width: 600,
+          height: 600
+      }
+    });
+    //
+    // Create buttons in the toolbar.
+    this.menus.register({
+      id: 'menu-toggle',
+      icon: this.paths.absolute('button-icon.png'),
+      text: 'Toggle',
+      action: () => this.onBtnToggle(),
+    });
+  }// onLoad()
+
+  updateHudView() {
+    if( this.mySplashIsVisible ){
+      const htmlPollResults
+          = '<div style="color: black; background-color: #ffffff; font-size: 24px;">'
+              + '<br><br><br><br><br><br>'
+              + '<br>....................'
+              + '<br>You Got It!'
+              + '<br>....................'
+              + `<br> \u2663`
+          + '</div>';
+
+      console.log(htmlPollResults);
+    
+      this.menus.postMessage({ action: 'hud-set', src: htmlPollResults });
+      return;
+    }else{
+      this.menus.postMessage({ action: 'hud-clear' });
     }
+  }// updateHudView()
 
-    /** Called when the user presses the action button */
-    onButtonPress() {
+  onBtnToggle() {
+    console.log(`onBtnToggle`);
+    //
+    this.mySplashIsVisible = !(this.mySplashIsVisible);
+    this.updateHudView();
+  }
 
-        // Show alert
-        this.menus.alert(`Hello from ${this.constructor.name} version ${require('../package.json').version}!`, 'Hello world!', 'info')
 
-    }
-
-}
+}// class OverlayMessagePlugin ===========================================================
