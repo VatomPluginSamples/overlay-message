@@ -21,8 +21,8 @@ export default class OverlayMessagePlugin extends BasePlugin {
   //================ properties of class OverlayMessagePlugin
 
   // Plugin ID
-  static get id()             { return 'toast-notice' }
-  static get name()           { return 'Toast Notice' } 
+  static get id()             { return 'overlay-message' }
+  static get name()           { return 'Overlay Message' } 
   //
   // Client instance properties
   //myHudState        = null;   // What is currently showing on the hud?
